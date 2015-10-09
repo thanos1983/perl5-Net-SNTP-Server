@@ -16,6 +16,7 @@
 #     BUILD_REQUIRES => { Test::More=>q[0] }
 #     CONFIGURE_REQUIRES => { ExtUtils::MakeMaker=>q[0] }
 #     LICENSE => q[Artistic_2_0]
+#     META_MERGE => { resources=>{ repository=>{ type=>q[git], url=>q[https://github.com/thanos1983/perl5-Net-SNTP-Client.git], web=>q[https://github.com/thanos1983/perl5-Net-SNTP-Client] } }, meta-spec=>{ version=>q[20] } }
 #     MIN_PERL_VERSION => q[5.006]
 #     NAME => q[Net::SNTP::Server]
 #     PL_FILES => {  }
@@ -23,7 +24,7 @@
 #     TEST_REQUIRES => {  }
 #     VERSION_FROM => q[lib/Net/SNTP/Server.pm]
 #     clean => { FILES=>q[Net-SNTP-Server-*] }
-#     dist => { COMPRESS=>q[gzip -9f], SUFFIX=>q[gz] }
+#     dist => { SUFFIX=>q[gz], COMPRESS=>q[gzip -9f] }
 
 # --- MakeMaker post_initialize section:
 
@@ -62,11 +63,11 @@ DIRFILESEP = /
 DFSEP = $(DIRFILESEP)
 NAME = Net::SNTP::Server
 NAME_SYM = Net_SNTP_Server
-VERSION = 0.03
+VERSION = 0.04
 VERSION_MACRO = VERSION
-VERSION_SYM = 0_03
+VERSION_SYM = 0_04
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 0.03
+XS_VERSION = 0.04
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib/arch
@@ -260,7 +261,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = Net-SNTP-Server
-DISTVNAME = Net-SNTP-Server-0.03
+DISTVNAME = Net-SNTP-Server-0.04
 
 
 # --- MakeMaker macro section:
@@ -443,24 +444,24 @@ clean_subdirs :
 
 clean :: clean_subdirs
 	- $(RM_F) \
-	  blibdirs.ts core.*perl.*.? \
-	  lib$(BASEEXT).def $(INST_ARCHAUTODIR)/extralibs.all \
-	  $(BASEEXT).bso core.[0-9][0-9][0-9][0-9][0-9] \
-	  pm_to_blib.ts tmon.out \
-	  $(BASEEXT).def *$(OBJ_EXT) \
-	  core.[0-9][0-9][0-9][0-9] core \
-	  core.[0-9][0-9][0-9] pm_to_blib \
-	  perl$(EXE_EXT) $(MAKE_APERL_FILE) \
-	  $(BASEEXT).exp $(BOOTSTRAP) \
-	  core.[0-9] $(INST_ARCHAUTODIR)/extralibs.ld \
-	  perl perlmain.c \
-	  MYMETA.json perl.exe \
-	  *$(LIB_EXT) $(BASEEXT).x \
-	  core.[0-9][0-9] mon.out \
-	  *perl.core so_locations \
-	  MYMETA.yml 
+	  perlmain.c $(BASEEXT).x \
+	  core core.[0-9][0-9][0-9][0-9] \
+	  core.[0-9][0-9][0-9] MYMETA.yml \
+	  *perl.core core.[0-9][0-9] \
+	  $(MAKE_APERL_FILE) core.[0-9] \
+	  *$(LIB_EXT) core.*perl.*.? \
+	  perl.exe MYMETA.json \
+	  $(BASEEXT).exp core.[0-9][0-9][0-9][0-9][0-9] \
+	  pm_to_blib perl$(EXE_EXT) \
+	  $(INST_ARCHAUTODIR)/extralibs.all perl \
+	  tmon.out blibdirs.ts \
+	  $(BASEEXT).bso mon.out \
+	  $(INST_ARCHAUTODIR)/extralibs.ld *$(OBJ_EXT) \
+	  $(BOOTSTRAP) so_locations \
+	  lib$(BASEEXT).def pm_to_blib.ts \
+	  $(BASEEXT).def 
 	- $(RM_RF) \
-	  blib Net-SNTP-Server-* 
+	  Net-SNTP-Server-* blib 
 	- $(MV) $(FIRST_MAKEFILE) $(MAKEFILE_OLD) $(DEV_NULL)
 
 
@@ -473,7 +474,7 @@ realclean_subdirs :
 # Delete temporary files (via clean) and also delete dist files
 realclean purge ::  clean realclean_subdirs
 	- $(RM_F) \
-	  $(MAKEFILE_OLD) $(FIRST_MAKEFILE) 
+	  $(FIRST_MAKEFILE) $(MAKEFILE_OLD) 
 	- $(RM_RF) \
 	  $(DISTVNAME) 
 
@@ -490,7 +491,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) 'configure_requires:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  ExtUtils::MakeMaker: 0' >> META_new.yml
 	$(NOECHO) $(ECHO) 'dynamic_config: 1' >> META_new.yml
-	$(NOECHO) $(ECHO) 'generated_by: '\''ExtUtils::MakeMaker version 6.66, CPAN::Meta::Converter version 2.120921'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) 'generated_by: '\''ExtUtils::MakeMaker version 6.66, CPAN::Meta::Converter version 2.133380'\''' >> META_new.yml
 	$(NOECHO) $(ECHO) 'license: unknown' >> META_new.yml
 	$(NOECHO) $(ECHO) 'meta-spec:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  url: http://module-build.sourceforge.net/META-spec-v1.4.html' >> META_new.yml
@@ -502,7 +503,8 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '    - inc' >> META_new.yml
 	$(NOECHO) $(ECHO) 'requires:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  perl: 5.006' >> META_new.yml
-	$(NOECHO) $(ECHO) 'version: 0.03' >> META_new.yml
+	$(NOECHO) $(ECHO) 'resources: {}' >> META_new.yml
+	$(NOECHO) $(ECHO) 'version: 0.04' >> META_new.yml
 	-$(NOECHO) $(MV) META_new.yml $(DISTVNAME)/META.yml
 	$(NOECHO) $(ECHO) Generating META.json
 	$(NOECHO) $(ECHO) '{' > META_new.json
@@ -511,7 +513,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '      "Athanasios Garyfalos <garyfalos@cpan.org\u0002>"' >> META_new.json
 	$(NOECHO) $(ECHO) '   ],' >> META_new.json
 	$(NOECHO) $(ECHO) '   "dynamic_config" : 1,' >> META_new.json
-	$(NOECHO) $(ECHO) '   "generated_by" : "ExtUtils::MakeMaker version 6.66, CPAN::Meta::Converter version 2.120921",' >> META_new.json
+	$(NOECHO) $(ECHO) '   "generated_by" : "ExtUtils::MakeMaker version 6.66, CPAN::Meta::Converter version 2.133380",' >> META_new.json
 	$(NOECHO) $(ECHO) '   "license" : [' >> META_new.json
 	$(NOECHO) $(ECHO) '      "unknown"' >> META_new.json
 	$(NOECHO) $(ECHO) '   ],' >> META_new.json
@@ -544,7 +546,8 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '      }' >> META_new.json
 	$(NOECHO) $(ECHO) '   },' >> META_new.json
 	$(NOECHO) $(ECHO) '   "release_status" : "stable",' >> META_new.json
-	$(NOECHO) $(ECHO) '   "version" : "0.03"' >> META_new.json
+	$(NOECHO) $(ECHO) '   "resources" : {},' >> META_new.json
+	$(NOECHO) $(ECHO) '   "version" : "0.04"' >> META_new.json
 	$(NOECHO) $(ECHO) '}' >> META_new.json
 	-$(NOECHO) $(MV) META_new.json $(DISTVNAME)/META.json
 
