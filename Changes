@@ -1,5 +1,4 @@
 Revision history for Net-SNTP-Server
 
-0.03    2015-10-08/17:25:34
-        Third version, updating core code compatible with Win and Linux.
-        Adding ability of retrieving information from ntpdc daemon (NTP package).
+0.04    2015-10-9/6:35:19 pm
+        Foorth version, adding git hub repo.
