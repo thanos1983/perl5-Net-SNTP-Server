@@ -11,13 +11,13 @@ Net::SNTP::Server - Perl Module SNTP Server based on L<RFC4330|https://tools.iet
 
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 =cut
 
 ## Version of the Net::SNTP::Server module
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 $VERSION = eval $VERSION;
 
 use POSIX qw();
@@ -521,7 +521,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 =head1 CHANGE LOG
 
 $Log: Server.pm,v $
-Revision 4.0  2015/10/09 6:43:31 pm  Thanos
+Revision 5.0  2015/10/09 7:25:31 pm  Thanos
 
 
 =cut
