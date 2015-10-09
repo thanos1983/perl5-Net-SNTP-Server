@@ -16,7 +16,7 @@
 #     BUILD_REQUIRES => { Test::More=>q[0] }
 #     CONFIGURE_REQUIRES => { ExtUtils::MakeMaker=>q[0] }
 #     LICENSE => q[Artistic_2_0]
-#     META_MERGE => { resources=>{ repository=>{ type=>q[git], url=>q[https://github.com/thanos1983/perl5-Net-SNTP-Client.git], web=>q[https://github.com/thanos1983/perl5-Net-SNTP-Client] } }, meta-spec=>{ version=>q[20] } }
+#     META_MERGE => { meta-spec=>{ version=>q[5] }, resources=>{ repository=>{ type=>q[git], url=>q[https://github.com/thanos1983/perl5-Net-SNTP-Server.git], web=>q[https://github.com/thanos1983/perl5-Net-SNTP-Server] } } }
 #     MIN_PERL_VERSION => q[5.006]
 #     NAME => q[Net::SNTP::Server]
 #     PL_FILES => {  }
@@ -24,7 +24,7 @@
 #     TEST_REQUIRES => {  }
 #     VERSION_FROM => q[lib/Net/SNTP/Server.pm]
 #     clean => { FILES=>q[Net-SNTP-Server-*] }
-#     dist => { SUFFIX=>q[gz], COMPRESS=>q[gzip -9f] }
+#     dist => { COMPRESS=>q[gzip -9f], SUFFIX=>q[gz] }
 
 # --- MakeMaker post_initialize section:
 
@@ -63,11 +63,11 @@ DIRFILESEP = /
 DFSEP = $(DIRFILESEP)
 NAME = Net::SNTP::Server
 NAME_SYM = Net_SNTP_Server
-VERSION = 0.04
+VERSION = 0.05
 VERSION_MACRO = VERSION
-VERSION_SYM = 0_04
+VERSION_SYM = 0_05
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 0.04
+XS_VERSION = 0.05
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib/arch
@@ -261,7 +261,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = Net-SNTP-Server
-DISTVNAME = Net-SNTP-Server-0.04
+DISTVNAME = Net-SNTP-Server-0.05
 
 
 # --- MakeMaker macro section:
@@ -444,24 +444,24 @@ clean_subdirs :
 
 clean :: clean_subdirs
 	- $(RM_F) \
-	  perlmain.c $(BASEEXT).x \
-	  core core.[0-9][0-9][0-9][0-9] \
-	  core.[0-9][0-9][0-9] MYMETA.yml \
-	  *perl.core core.[0-9][0-9] \
-	  $(MAKE_APERL_FILE) core.[0-9] \
-	  *$(LIB_EXT) core.*perl.*.? \
-	  perl.exe MYMETA.json \
-	  $(BASEEXT).exp core.[0-9][0-9][0-9][0-9][0-9] \
-	  pm_to_blib perl$(EXE_EXT) \
-	  $(INST_ARCHAUTODIR)/extralibs.all perl \
-	  tmon.out blibdirs.ts \
-	  $(BASEEXT).bso mon.out \
-	  $(INST_ARCHAUTODIR)/extralibs.ld *$(OBJ_EXT) \
-	  $(BOOTSTRAP) so_locations \
-	  lib$(BASEEXT).def pm_to_blib.ts \
-	  $(BASEEXT).def 
+	  MYMETA.yml *perl.core \
+	  $(INST_ARCHAUTODIR)/extralibs.all so_locations \
+	  pm_to_blib.ts perl \
+	  blibdirs.ts core.[0-9][0-9][0-9][0-9][0-9] \
+	  MYMETA.json core.[0-9][0-9][0-9][0-9] \
+	  pm_to_blib lib$(BASEEXT).def \
+	  *$(LIB_EXT) $(BOOTSTRAP) \
+	  core core.*perl.*.? \
+	  $(MAKE_APERL_FILE) *$(OBJ_EXT) \
+	  core.[0-9] $(BASEEXT).bso \
+	  core.[0-9][0-9] $(BASEEXT).def \
+	  mon.out perl.exe \
+	  perl$(EXE_EXT) $(INST_ARCHAUTODIR)/extralibs.ld \
+	  $(BASEEXT).exp $(BASEEXT).x \
+	  perlmain.c tmon.out \
+	  core.[0-9][0-9][0-9] 
 	- $(RM_RF) \
-	  Net-SNTP-Server-* blib 
+	  blib Net-SNTP-Server-* 
 	- $(MV) $(FIRST_MAKEFILE) $(MAKEFILE_OLD) $(DEV_NULL)
 
 
@@ -474,7 +474,7 @@ realclean_subdirs :
 # Delete temporary files (via clean) and also delete dist files
 realclean purge ::  clean realclean_subdirs
 	- $(RM_F) \
-	  $(FIRST_MAKEFILE) $(MAKEFILE_OLD) 
+	  $(MAKEFILE_OLD) $(FIRST_MAKEFILE) 
 	- $(RM_RF) \
 	  $(DISTVNAME) 
 
@@ -504,7 +504,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) 'requires:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  perl: 5.006' >> META_new.yml
 	$(NOECHO) $(ECHO) 'resources: {}' >> META_new.yml
-	$(NOECHO) $(ECHO) 'version: 0.04' >> META_new.yml
+	$(NOECHO) $(ECHO) 'version: 0.05' >> META_new.yml
 	-$(NOECHO) $(MV) META_new.yml $(DISTVNAME)/META.yml
 	$(NOECHO) $(ECHO) Generating META.json
 	$(NOECHO) $(ECHO) '{' > META_new.json
@@ -547,7 +547,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '   },' >> META_new.json
 	$(NOECHO) $(ECHO) '   "release_status" : "stable",' >> META_new.json
 	$(NOECHO) $(ECHO) '   "resources" : {},' >> META_new.json
-	$(NOECHO) $(ECHO) '   "version" : "0.04"' >> META_new.json
+	$(NOECHO) $(ECHO) '   "version" : "0.05"' >> META_new.json
 	$(NOECHO) $(ECHO) '}' >> META_new.json
 	-$(NOECHO) $(MV) META_new.json $(DISTVNAME)/META.json
 
