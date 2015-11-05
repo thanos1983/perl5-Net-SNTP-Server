@@ -11,13 +11,13 @@ Net::SNTP::Server - Perl Module SNTP Server based on L<RFC4330|https://tools.iet
 
 =head1 VERSION
 
-Version 0.05
+Version 0.06
 
 =cut
 
 ## Version of the Net::SNTP::Server module
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 $VERSION = eval $VERSION;
 
 use POSIX qw();
@@ -118,15 +118,26 @@ The module has been tested on LinuxOS and WindowsOS but it should be compatible
 
 =cut
 
-use constant {
-    TRUE                  => 1,
-    FALSE                 => 0,
-    MAXBYTES              => 512,
-    UNIX_EPOCH            => 2208988800,
-    MIN_UDP_PORT          => 1,
-    MAX_UDP_PORT          => 65535,
-    DEFAULT_LOCAL_HOST_IP => "127.0.0.1",
-};
+## Define constands
+
+# The_version_of_constant provided by perl 5.6.1 does not support that.
+# use constant {
+#     TRUE                  => 1,
+#     FALSE                 => 0,
+#     MAXBYTES              => 512,
+#     UNIX_EPOCH            => 2208988800,
+#     MIN_UDP_PORT          => 1,
+#     MAX_UDP_PORT          => 65535,
+#     DEFAULT_LOCAL_HOST_IP => "127.0.0.1",
+# };
+
+use constant TRUE                  => 1;
+use constant FALSE                 => 0;
+use constant MAXBYTES              => 512;
+use constant UNIX_EPOCH            => 2208988800;
+use constant MIN_UDP_PORT          => 1;
+use constant MAX_UDP_PORT          => 65536;
+use constant DEFAULT_LOCAL_HOST_IP => "127.0.0.1";
 
 =head2 basicSNTPSetup
 
@@ -521,7 +532,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 =head1 CHANGE LOG
 
 $Log: Server.pm,v $
-Revision 5.0  2015/10/09 7:25:31 pm  Thanos
+Revision 6.0  2015/10/09 12:13:31 pm  Thanos
 
 
 =cut

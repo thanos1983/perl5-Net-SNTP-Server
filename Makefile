@@ -16,7 +16,7 @@
 #     BUILD_REQUIRES => { Test::More=>q[0] }
 #     CONFIGURE_REQUIRES => { ExtUtils::MakeMaker=>q[0] }
 #     LICENSE => q[Artistic_2_0]
-#     META_MERGE => { meta-spec=>{ version=>q[5] }, resources=>{ repository=>{ type=>q[git], url=>q[https://github.com/thanos1983/perl5-Net-SNTP-Server.git], web=>q[https://github.com/thanos1983/perl5-Net-SNTP-Server] } } }
+#     META_MERGE => { resources=>{ repository=>{ type=>q[git], url=>q[https://github.com/thanos1983/perl5-Net-SNTP-Server.git], web=>q[https://github.com/thanos1983/perl5-Net-SNTP-Server] } }, meta-spec=>{ version=>q[6] } }
 #     MIN_PERL_VERSION => q[5.006]
 #     NAME => q[Net::SNTP::Server]
 #     PL_FILES => {  }
@@ -63,11 +63,11 @@ DIRFILESEP = /
 DFSEP = $(DIRFILESEP)
 NAME = Net::SNTP::Server
 NAME_SYM = Net_SNTP_Server
-VERSION = 0.05
+VERSION = 0.06
 VERSION_MACRO = VERSION
-VERSION_SYM = 0_05
+VERSION_SYM = 0_06
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 0.05
+XS_VERSION = 0.06
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib/arch
@@ -261,7 +261,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = Net-SNTP-Server
-DISTVNAME = Net-SNTP-Server-0.05
+DISTVNAME = Net-SNTP-Server-0.06
 
 
 # --- MakeMaker macro section:
@@ -444,24 +444,24 @@ clean_subdirs :
 
 clean :: clean_subdirs
 	- $(RM_F) \
-	  MYMETA.yml *perl.core \
-	  $(INST_ARCHAUTODIR)/extralibs.all so_locations \
-	  pm_to_blib.ts perl \
-	  blibdirs.ts core.[0-9][0-9][0-9][0-9][0-9] \
-	  MYMETA.json core.[0-9][0-9][0-9][0-9] \
-	  pm_to_blib lib$(BASEEXT).def \
-	  *$(LIB_EXT) $(BOOTSTRAP) \
-	  core core.*perl.*.? \
-	  $(MAKE_APERL_FILE) *$(OBJ_EXT) \
-	  core.[0-9] $(BASEEXT).bso \
-	  core.[0-9][0-9] $(BASEEXT).def \
-	  mon.out perl.exe \
-	  perl$(EXE_EXT) $(INST_ARCHAUTODIR)/extralibs.ld \
-	  $(BASEEXT).exp $(BASEEXT).x \
-	  perlmain.c tmon.out \
-	  core.[0-9][0-9][0-9] 
+	  core $(BASEEXT).def \
+	  lib$(BASEEXT).def perl.exe \
+	  perl$(EXE_EXT) *perl.core \
+	  perlmain.c pm_to_blib \
+	  core.[0-9] tmon.out \
+	  $(INST_ARCHAUTODIR)/extralibs.ld $(BOOTSTRAP) \
+	  mon.out so_locations \
+	  core.[0-9][0-9][0-9][0-9][0-9] core.[0-9][0-9] \
+	  $(BASEEXT).bso blibdirs.ts \
+	  MYMETA.json *$(OBJ_EXT) \
+	  *$(LIB_EXT) pm_to_blib.ts \
+	  perl $(MAKE_APERL_FILE) \
+	  $(BASEEXT).exp MYMETA.yml \
+	  core.[0-9][0-9][0-9] $(INST_ARCHAUTODIR)/extralibs.all \
+	  core.[0-9][0-9][0-9][0-9] $(BASEEXT).x \
+	  core.*perl.*.? 
 	- $(RM_RF) \
-	  blib Net-SNTP-Server-* 
+	  Net-SNTP-Server-* blib 
 	- $(MV) $(FIRST_MAKEFILE) $(MAKEFILE_OLD) $(DEV_NULL)
 
 
@@ -504,7 +504,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) 'requires:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  perl: 5.006' >> META_new.yml
 	$(NOECHO) $(ECHO) 'resources: {}' >> META_new.yml
-	$(NOECHO) $(ECHO) 'version: 0.05' >> META_new.yml
+	$(NOECHO) $(ECHO) 'version: 0.06' >> META_new.yml
 	-$(NOECHO) $(MV) META_new.yml $(DISTVNAME)/META.yml
 	$(NOECHO) $(ECHO) Generating META.json
 	$(NOECHO) $(ECHO) '{' > META_new.json
@@ -547,7 +547,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '   },' >> META_new.json
 	$(NOECHO) $(ECHO) '   "release_status" : "stable",' >> META_new.json
 	$(NOECHO) $(ECHO) '   "resources" : {},' >> META_new.json
-	$(NOECHO) $(ECHO) '   "version" : "0.05"' >> META_new.json
+	$(NOECHO) $(ECHO) '   "version" : "0.06"' >> META_new.json
 	$(NOECHO) $(ECHO) '}' >> META_new.json
 	-$(NOECHO) $(MV) META_new.json $(DISTVNAME)/META.json
 
